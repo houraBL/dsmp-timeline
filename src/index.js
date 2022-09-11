@@ -1,11 +1,7 @@
-const apiHelper = require('./apiHelper.js');
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './components/app';
 
-console.log('Dream SMP Timeline');
-
-async function main() {
-    const wikiData = await apiHelper.fetchWikiExtract('Timeline_of_the_Dream_SMP');
-    var strippedHtml = wikiData.parse.text.replace(/<[^>]+>/g, '');
-    console.log(strippedHtml);
-}
-
-main();
+const container = document.getElementById('root');
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(<App tab="home" />);

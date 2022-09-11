@@ -1,0 +1,27 @@
+.timeline {
+    margin-top: .5rem;
+    padding-left: 10px;
+}
+
+.timeline ul li {
+    list-style: none;
+    margin: 0;
+    padding: .5rem 1rem;
+    border-radius: 3px;
+}
+
+.timeline ul li:hover {
+    background-color:  #ddfff7;
+}
+
+.timeline a:hover {
+    text-decoration: none;
+}
+
+.timeline h3 a {
+    color: #00bc8c;
+}
+
+.timeline h3 a:hover {
+    color: #00d19d;
+}

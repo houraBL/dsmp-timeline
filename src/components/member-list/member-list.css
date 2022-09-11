@@ -1,0 +1,27 @@
+.member-list {
+    margin-top: .5rem;
+    padding-left: 10px;
+}
+
+.member-list ul li {
+    list-style: none;
+    margin: 0;
+    padding: .5rem 1rem;
+    border-radius: 3px;
+}
+
+.member-list ul li:hover {
+    background-color:  #ddfff7;
+}
+
+.member-list a:hover {
+    text-decoration: none;
+}
+
+.member-list h3 a {
+    color: #00bc8c;
+}
+
+.member-list h3 a:hover {
+    color: #00d19d;
+}

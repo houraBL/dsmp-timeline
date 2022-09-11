@@ -3,11 +3,12 @@ const { default: axios } = require("axios");
 function fetchWikiExtract(param) {
     const wikiEndpoint = 'https://dreamteam.fandom.com/api.php';
     const wikiParams = '?action=parse'
-    + '&prop=text'
+    + '&prop=wikitext'
     //+ '&exsentences=2'
     //+ '&exlimit=1'
-    + '&page=' + param
+    + '&pageid=' + param
     //+ '&explaintext=1'
+    + '&redirects=true'
     + '&format=json'
     + '&formatversion=2'
     + '&origin=*';
@@ -30,6 +31,16 @@ function fetchWikiExtract(param) {
         console.log('an error has occured: ' + error);
         return null;
     })
+}
+
+const apiHelper = require('./services/apiHelper.js');
+
+console.log('Dream SMP Timeline');
+
+async function getWikiData() {
+    const wikiData = await apiHelper.fetchWikiExtract('1063');
+    var strippedHtml = wikiData.parse.wikitext.replace(/<[^>]+>/g, '');
+    console.log(strippedHtml);
 }
 
 module.exports = { fetchWikiExtract }
