@@ -22,7 +22,7 @@ export default class Timeline extends Component {
         //const timelineInfo = getWikiData();
         return (
             <div className='timeline'>
-                <h3><a href="#">DreamSMP Members</a></h3>
+                <h3><a href="#">DreamSMP Timeline</a></h3>
                 <ul >
                         <li>
                             <a href="#">20.02.2020 Creation of the server</a>
