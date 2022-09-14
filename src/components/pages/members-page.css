@@ -1,0 +1,16 @@
+.row:after {
+    display: table;
+}
+
+.column {
+
+}
+
+.member-list {
+    width: auto;
+    float: left;
+
+}
+
+.member-info {
+}

@@ -1,0 +1,46 @@
+.members {
+    font-family: sans-serif;
+    font-weight: bold;
+    background-color: whitesmoke;
+    height: calc(100vh - 56px);
+}
+
+.members ul {
+    width: fit-content;
+    display:block;
+    justify-content: center;
+    padding-inline-start: 0%;
+
+    margin-block-start: 0%;
+    margin: 0;
+    padding: 0 2rem;
+}
+.members ul li {
+    list-style: none;
+    margin: 0;
+    padding: .5rem .5rem;
+    border-radius: 3px;
+    cursor: pointer;
+    color: forestgreen;
+}
+
+
+.members ul li:hover {
+    background-color:rgb(232, 232, 232);
+}
+
+.members a:hover {
+    text-decoration: none;
+}
+
+.members h3 {
+    color: forestgreen;
+    margin: 0;
+    padding: 1rem .5rem;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.members h3:hover {
+    cursor: default;
+}
