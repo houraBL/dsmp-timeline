@@ -22,7 +22,6 @@ export default class ServerInfo extends Component {
 
   updateServerInfo = () => {
     this.mwapiService.getServerInfo().then((wikiRespond) => {
-      console.log(wikiRespond);
       const serverInfo = wikiRespond.text
         .split("</div><p>")[1]
         .split('<div id="toc" class="toc"')[0]
@@ -43,7 +42,7 @@ export default class ServerInfo extends Component {
     return (
       <div className="server-info">
         {
-          //<ImageSlider/>
+          <ImageSlider />
         }
         <h3 className="title">DreamSMP</h3>
         <h4>{serverInfo}</h4>

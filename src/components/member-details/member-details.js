@@ -35,6 +35,8 @@ export default class MemberDetails extends Component {
 
       const personName = wikiRespond.title.split("/")[0];
       const ign = strippedHTML.split("IGN ").pop().split(" ")[0];
+      console.log(strippedHTML);
+      console.log(strippedHTML.split("IGN ").pop());
       const dateJoined = strippedHTML
         .split("Date joined ")
         .pop()

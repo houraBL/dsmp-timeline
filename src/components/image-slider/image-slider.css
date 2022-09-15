@@ -15,6 +15,7 @@
 }
 
 .image-slider .image {
+  width: 50%;
 }
 
 .image-slider .card {
