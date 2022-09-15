@@ -14,8 +14,6 @@ async function getWikiData() {
 }
 */
 
-
-
 export default class ApexChart extends Component {
   constructor(props) {
     super(props);
@@ -239,7 +237,7 @@ export default class ApexChart extends Component {
         },
         tooltip: {
 
-          
+
         },
       },
     };

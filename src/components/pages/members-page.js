@@ -4,16 +4,19 @@ import MemberDetails from "../member-details";
 
 import "./members-page.css";
 
-const MembersPage = ({ history, match }) => {
-  //const { id } = match.params;
+const MembersPage = (props) => {
 
   return (
     <div className="members-page row">
       <div className="column member-list">
-        <Members className="column member-list" />
+        <Members
+          className="column member-list"
+          onMemberSelected={props.onMemberSelected}
+          pageid={props.pageid}
+        />
       </div>
       <div className="column member-info">
-        <MemberDetails />
+        <MemberDetails pageid={props.pageid} />
       </div>
     </div>
   );

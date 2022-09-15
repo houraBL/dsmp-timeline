@@ -14,16 +14,17 @@ import Timeline from "../timeline";
 import ServerInfo from "../server-info";
 
 import { MembersPage, TimelinePage } from "../pages";
+import MemberDetails from "../member-details";
 
 export default class App extends Component {
   state = {
-    selectedMember: null,
+    pageid: 1090,
     hasError: false,
   };
 
   onMemberSelected = (pageid) => {
     this.setState({
-      selectedMember: pageid,
+      pageid: pageid,
     });
   };
 
@@ -35,7 +36,7 @@ export default class App extends Component {
     if (this.hasError) {
       return <div>Error has occurred</div>;
     }
-    
+
     return (
       <Router>
         <div>
@@ -57,11 +58,20 @@ export default class App extends Component {
                         renders the first one that matches the current URL. */}
           <Routes>
             <Route path="/" element={<ServerInfo />} exact />
-            <Route path="/members" element={<MembersPage />} exact />
             <Route
-              path="/members/:id"
+              path="/members"
+              element={
+                <MembersPage
+                  onMemberSelected={this.onMemberSelected}
+                  pageid={this.state.pageid}
+                />
+              }
+              exact
+            />
+            <Route
+              path="/members/:pageid"
               render={() => {
-                <h2>member id</h2>;
+                return <MemberDetails pageid={this.state.pageid} />;
               }}
             />
             <Route path="/timeline" element={<TimelinePage />} />

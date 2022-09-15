@@ -15,20 +15,20 @@ export default class Members extends Component {
       { name: "Awesamdude", pageid: 1059 },
       { name: "BadBoyHalo", pageid: 1062 },
       { name: "BlondeQuackity", pageid: 10981 },
-      { name: "Boo", pageid: 10098 },
+      //{ name: "Boo", pageid: 10098 },
       { name: "BoomerNA", pageid: 9930 },
       { name: "Callahan ", pageid: 1057 },
       { name: "CaptainPuffy", pageid: 2122 },
       { name: "ConnorEatsPants", pageid: 2114 },
       { name: "Dream", pageid: 1037 },
-      { name: "DreamXD", pageid: 4279 },
-      { name: "Drista", pageid: 1130 },
+      //{ name: "DreamXD", pageid: 4279 },
+      //{ name: "Drista", pageid: 1130 },
       { name: "Eret", pageid: 1084 },
       { name: "Eryn", pageid: 9873 },
       { name: "Foolish Gamers", pageid: 4224 },
       { name: "Fundy", pageid: 1036 },
       { name: "GeorgeNotFound", pageid: 1048 },
-      { name: "Ghostbur", pageid: 2202 },
+      //{ name: "Ghostbur", pageid: 2202 },
     ],
   };
 
@@ -38,7 +38,7 @@ export default class Members extends Component {
         <li
           className="list-group-item"
           key={pageid}
-          onClick={() => this.props.onItemSelected(pageid)}
+          onClick={() => this.props.onMemberSelected(pageid)}
         >
           {name}
         </li>
@@ -51,8 +51,8 @@ export default class Members extends Component {
 
     const items = this.renderItems(members);
     return (
-      <div className="members">
-        <ul className="item-list list-group">
+      <div className=" members">
+        <ul className=" item-list list-group">
           <h3>Active members</h3>
           {items}
         </ul>
