@@ -29,6 +29,13 @@ export default class MWapiService {
     return this.getResource(wikiParams);
   }
 
+  getServerInfo() {
+    const timelinePageName = "Dream_SMP";
+    const wikiParams = this.getWikiParams() + "&page=" + timelinePageName;
+
+    return this.getResource(wikiParams);
+  }
+
   getMember(pageid) {
     const wikiParams = this.getWikiParams() + "&pageid=" + pageid + "&origin=*";
     return this.getResource(wikiParams);

@@ -1,32 +1,18 @@
 .server-info {
-    margin-top: .5rem;
-    padding-left: 10px;
+    margin: 2rem;
 }
 
-.server-info ul li {
-    list-style: none;
-    margin: 0;
-    padding: .5rem 1rem;
-    border-radius: 3px;
-}
-
-.server-info ul li:hover {
-    background-color:  #ddfff7;
-}
-
-.server-info a:hover {
-    text-decoration: none;
-}
-
-.server-info h3 a {
-    color: #00bc8c;
-}
-
-.server-info h3 a:hover {
-    color: #00d19d;
+.server-info .title {
+    color:darkgreen;
+    font-family: sans-serif;
+    padding: 0;
+    margin: 1rem;
+    font-size: 1.5rem;
 }
 
 .server-info h4{
-    color :dimgray;
-    padding: .5rem 1rem;
+    color:rgb(61, 61, 61);
+    padding: 0;
+    margin: 0;
+    text-indent: 1rem;
 }

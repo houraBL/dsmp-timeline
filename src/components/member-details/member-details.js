@@ -67,19 +67,11 @@ export default class MemberDetails extends Component {
     });
   };
 
-  trailing(str, pattern) {
-    const re = new RegExp(`${pattern}(.*)$`);
-    if (re.test(str)) return RegExp.$1.toString();
-    return "";
-  }
-
   //constructor() { super(); }
 
   componentDidMount() {
     this.updateMember();
   }
-
-  componentWillUnmount() {}
 
   componentDidUpdate(prevProps) {
     if (this.props.pageid !== prevProps.pageid) {
@@ -87,8 +79,6 @@ export default class MemberDetails extends Component {
       this.updateMember(this.props.pageid);
     }
   }
-
-  componentDidCatch() {}
 
   render() {
     const { name, ign, dateJoined, gender, normalSkin, generalInfoP } =

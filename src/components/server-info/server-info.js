@@ -1,30 +1,56 @@
-import React from "react";
+import React, { Component } from "react";
 import "./server-info.css";
-//import {fetchWikiExtract}  from '../';
+import MWapiService from "../../services/mwapiService";
+import ImageSlider from "../image-slider";
 
-const ServerInfo = () => {
-  //onst wikiData = async () => {
-  // await fetchWikiExtract("1063");
-  //;
+export default class ServerInfo extends Component {
+  mwapiService = new MWapiService();
 
-  //ar strippedHtml = wikiData.parse.wikitext.replace(/<[^>]+>/g, "");
-  //console.log(strippedHtml);
+  state = {
+    serverInfo: "Loading...",
+  };
 
-  return (
-    <div className="server-info">
-      <h3>
-        <a href="#">DreamSMP</a>
-      </h3>
-      <h4>
-        Dream SMP - is a Survival Multiplayer Server created by youtuber Dream
-        and his friends GeorgeNotFound, Sapnap and BadBoyHalo
-      </h4>
+  getStrippedHTML(wikiRespond) {
+    console.log(wikiRespond);
+    var strippedHtml = wikiRespond.text
+      .replace(/<[^>]+>/g, "")
+      .replace(/(\r\n|\r|\n){2}/g, "$1")
+      .replace(/(\r\n|\r|\n){3,}/g, "$1\n")
+      .replace(/\s\s+/g, " ");
+    return strippedHtml;
+  }
 
-    </div>
-  );
-};
+  updateServerInfo = () => {
+    this.mwapiService.getServerInfo().then((wikiRespond) => {
+      console.log(wikiRespond);
+      const serverInfo = wikiRespond.text
+        .split("</div><p>")[1]
+        .split('<div id="toc" class="toc"')[0]
+        .replace(/<[^>]+>/g, "");
 
-export default ServerInfo;
+      this.setState({
+        serverInfo: serverInfo,
+      });
+    });
+  };
+
+  componentDidMount() {
+    this.updateServerInfo();
+  }
+
+  render() {
+    const { serverInfo } = this.state;
+    return (
+      <div className="server-info">
+        {
+          //<ImageSlider/>
+        }
+        <h3 className="title">DreamSMP</h3>
+        <h4>{serverInfo}</h4>
+      </div>
+    );
+  }
+}
 
 /* <div className="mw-parser-output">
         <div
