@@ -15,7 +15,8 @@
 }
 
 .image-slider .image {
-  width: 50%;
+  display: block;
+  height: 50vh;
 }
 
 .image-slider .card {
@@ -34,4 +35,12 @@
   display: flex;
   align-items: stretch;
   justify-content: space-between;
+}
+
+.image-slider .button {
+  background-color: lightgreen;
+  border-color: palegreen;
+  border-radius: 2px;
+  width: auto;
+  height: 2rem;
 }

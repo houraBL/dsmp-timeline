@@ -1,18 +1,11 @@
 import React, { Component } from "react";
 import "./image-slider.css";
+import img from "../../images/Dream_SMP_Preview_Image.webp";
 
 export default class ImageSlider extends Component {
   state = {
     index: 0,
-    images: [
-      "https://static.wikia.nocookie.net/dream_team/images/0/0d/Dream_SMP_Preview_Image.png",
-      "https://static.wikia.nocookie.net/dream_team/images/f/ff/L_cast.PNG",
-      "https://static.wikia.nocookie.net/dream_team/images/8/8a/Lore-bridge.jpg",
-      "https://static.wikia.nocookie.net/dream_team/images/1/14/Technoblade_cabin.jpg",
-      "https://static.wikia.nocookie.net/dream_team/images/b/b2/Kinoko_Kingdom_construction.jpeg",
-      "https://static.wikia.nocookie.net/dream_team/images/c/c4/Last-l-manflag2.jpg",
-      "https://static.wikia.nocookie.net/dream_team/images/d/d7/FoolishSummerHome.jpg",
-    ],
+    images: ["../src/images/Dream_SMP_Preview_Image.webp"],
   };
 
   nextImage() {
@@ -37,26 +30,30 @@ export default class ImageSlider extends Component {
 
   render() {
     var currImage = this.state.images[this.state.index];
-    console.log(currImage);
 
     return (
       <div className="image-slider card">
         <div className="container">
-          <img className="image" src={currImage} alt="dreamSMP screenshot" />
+          <img
+            className="image"
+            src={img}
+            alt="dreamSMP screenshot"
+          />
         </div>
 
-        <div className="buttons">
+        {/*<div className="buttons">
           <button
             onClick={(e) => this.nextImage(e)}
-            className=""
+            className="button"
             aria-hidden="true"
-          ></button>
+          >Prev</button>
           <button
             onClick={(e) => this.prevImage(e)}
-            className=""
+            className="button"
             aria-hidden="true"
-          ></button>
-        </div>
+            text="<"
+          >Next</button>
+        </div>*/}
       </div>
     );
   }

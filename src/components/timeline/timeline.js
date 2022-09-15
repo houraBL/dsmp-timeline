@@ -97,10 +97,13 @@ export default class ApexChart extends Component {
   };
 
   getStrippedHTML(wikiRespond) {
-    var strippedHtml = wikiRespond.text.replace(/<[^>]+>/g, "");
+    var strippedHtml = wikiRespond.text
+      .replace(/<[^>]+>/g, "")
+      .replace(/[\[\]']+/g, "");
     //.replace(/(\r\n|\r|\n){2}/g, "$1")
     //.replace(/(\r\n|\r|\n){3,}/g, "$1\n")
     //.replace(/\s\s+/g, " ");
+    console.log(strippedHtml)
     return strippedHtml;
   }
 
@@ -119,15 +122,17 @@ export default class ApexChart extends Component {
         return n;
       });
 
-      console.log(erasInfoP)
-
-      const erasListP = erasList.split("\n\n").filter(function (n) {
+      const erasListP = erasList.split("\n").filter(function (n) {
         return n;
       });
 
+      console.log(erasListP);
+      console.log(erasInfoP);
+
+
       this.setState({
         textTimeline: strippedHTML,
-        //erasListP: erasListP,
+        erasListP: erasListP,
         erasInfoP: erasInfoP,
       });
     });
