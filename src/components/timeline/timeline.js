@@ -78,13 +78,11 @@ export default class ApexChart extends Component {
         marker: {
           show: false,
         },
-        custom: ({ series, seriesIndex, dataPointIndex, w }) => {
+        custom: ({ seriesIndex, w }) => {
           //console.log(w.config.series[seriesIndex]);
           this.setState({
             clickedEra: w.config.series[seriesIndex],
           });
-          var data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
-
           return null;
         },
       },
@@ -208,6 +206,8 @@ export default class ApexChart extends Component {
   render() {
     const { erasListP, erasListPPP, erasInfoP, options, series, clickedEra } =
       this.state;
+    const isCardShown = clickedEra.name === "";
+    console.log(isCardShown)
     return (
       <div id="chart">
         <ReactApexChart
@@ -217,27 +217,26 @@ export default class ApexChart extends Component {
           height="350"
         />
         <div className="timeline">
-          <div className="card">
+          <div style={isCardShown ? { display: "none" } : {}} className="card">
             <div className="title-holder">
               <div className="arc-title">{clickedEra.data[0].arc}:</div>
 
               <div className="era-title">{clickedEra.name}</div>
             </div>
-            {clickedEra.name ? (
-              <div className="dates">
-                {new Date(clickedEra.data[0].y[0]).toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })}
-                {" — "}
-                {new Date(clickedEra.data[0].y[1]).toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })}
-              </div>
-            ) : null}
+
+            <div className="dates">
+              {new Date(clickedEra.data[0].y[0]).toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+              {" — "}
+              {new Date(clickedEra.data[0].y[1]).toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </div>
 
             <div className="description">{clickedEra.data[0].description}</div>
           </div>
