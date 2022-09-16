@@ -10,6 +10,7 @@ export default class ApexChart extends Component {
     textTimeline: null,
     erasListP: [],
     erasInfoP: [],
+    erasListPPP: [],
     options: {
       chart: {
         type: "rangeBar",
@@ -54,86 +55,113 @@ export default class ApexChart extends Component {
       },
       tooltip: {},
     },
-    series: [
-      {
-        name: "Thomas Jefferson",
-        data: [
-          {
-            x: "4",
-            y: [new Date(1801, 2, 4).getTime(), new Date(1802, 2, 4).getTime()],
-          },
-          {
-            x: "2",
-            y: [new Date(1797, 2, 4).getTime(), new Date(1801, 2, 4).getTime()],
-          },
-          {
-            x: "6",
-            y: [
-              new Date(1795, 2, 22).getTime(),
-              new Date(1797, 2, 4).getTime(),
-            ],
-          },
-        ],
-      },
-      {
-        name: "Aaron Burr",
-        data: [
-          {
-            x: "2",
-            y: [new Date(1801, 2, 4).getTime(), new Date(1802, 3, 4).getTime()],
-          },
-        ],
-      },
-      {
-        name: "John Marshall",
-        data: [
-          {
-            x: "6",
-            y: [new Date(1797, 2, 4).getTime(), new Date(1801, 4, 2).getTime()],
-          },
-        ],
-      },
-    ],
+    series: [],
   };
 
   getStrippedHTML(wikiRespond) {
-    var strippedHtml = wikiRespond.text
+    let strippedHtml = wikiRespond.text
       .replace(/<[^>]+>/g, "")
-      .replace(/[\[\]']+/g, "");
+      .replace(/[[\]']+/g, "");
     //.replace(/(\r\n|\r|\n){2}/g, "$1")
     //.replace(/(\r\n|\r|\n){3,}/g, "$1\n")
     //.replace(/\s\s+/g, " ");
-    console.log(strippedHtml)
+    //console.log(strippedHtml);
     return strippedHtml;
+  }
+
+  getNestedErasList(erasList, erasInfo) {
+    const amazingDataStructure = [];
+    const series = [];
+    let cnt = 0;
+    const len = erasList.length;
+    let newEra = "";
+    let newEraInfo = erasInfo;
+    let arc = "";
+    for (let i = 1; cnt < len; i++) {
+      arc = erasList[cnt].slice(2);
+      amazingDataStructure.push({
+        //getting rid of the numeration
+        arc: arc,
+        eras: [],
+        arcDates: [],
+      });
+      //counter for all the elements we have worked with
+      cnt++;
+      // skipping the ones we worked with
+      for (let j = cnt; j < len; j++) {
+        // checking if element is a child
+        if (Number(erasList[j][0]) === i) {
+          //getting rid of the numeration in string
+          newEra = erasList[j].slice(4);
+          //getting eraInfo including dates & description
+          let newEraInfoDesc = newEraInfo
+            .substr(newEraInfo.indexOf(newEra) + newEra.length)
+            .split(/\n\n/gm)[0];
+          let elem = [
+            {
+              x: arc,
+              y: newEraInfoDesc
+                .match(/\w*\s\d*\W\s\d{4}/gm)
+                .map((date) => new Date(date).getTime()),
+              description: newEraInfoDesc.split(/\n/gm).pop(),
+            },
+          ];
+          series.push({
+            name: newEra,
+            data: elem,
+          });
+
+          amazingDataStructure[i - 1].eras.push(series[series.length - 1]);
+
+          cnt++;
+        } else {
+          break;
+        }
+      }
+    }
+    console.log(amazingDataStructure, series);
+    return [amazingDataStructure, series];
   }
 
   updateTimeline = () => {
     this.mwapiService.getTimeline().then((wikiRespond) => {
       const strippedHTML = this.getStrippedHTML(wikiRespond);
 
-      const erasList = strippedHTML
-        .split("Timeline eras")[1];
+      const erasList = strippedHTML.split("Timeline eras")[1];
+
+      const erasListPPP = erasList
+        .replace(/(\r\n|\r|\n){3,}/g, "$1\n")
+        .replace(/(\r\n|\r|\n){2}/g, "$1")
+        .split("\n1.")
+        .filter((n) => {
+          return n;
+        });
 
       const erasInfo = strippedHTML
         .split("Timeline eras")
         [(1, 2)].split("End of spoiler warning.")[0];
 
-      const erasInfoP = erasInfo.split("\n").filter(function (n) {
+      const erasInfoP = erasInfo.split("\n\n").filter((n) => {
         return n;
       });
 
-      const erasListP = erasList.split("\n").filter(function (n) {
+      const erasListP = erasList.split("\n").filter((n) => {
         return n;
       });
 
-      console.log(erasListP);
-      console.log(erasInfoP);
+      const dataToShow = this.getNestedErasList(erasListPPP, erasInfo);
+      //console.log(dataToShow[1])
+      console.log(this.state.series);
+      //console.log(erasInfo);
 
-
+      const newSeries = dataToShow[1];
+      console.log(newSeries);
       this.setState({
         textTimeline: strippedHTML,
         erasListP: erasListP,
         erasInfoP: erasInfoP,
+        erasListPPP: erasListPPP,
+        series: newSeries,
       });
     });
   };
@@ -143,7 +171,7 @@ export default class ApexChart extends Component {
   }
 
   render() {
-    const { erasListP, erasInfoP, options, series } = this.state;
+    const { erasListP, erasListPPP, erasInfoP, options, series } = this.state;
     return (
       <div id="chart">
         <ReactApexChart
@@ -153,21 +181,17 @@ export default class ApexChart extends Component {
           height={250}
         />
         <div className="person-story">
-          {erasListP.map((item, index) => (
-            <p key={"p" + index}>{item}</p>
-          ))}
+          {
+            //erasListPPP.map((item, index) => (<p key={"p" + index}>{item}</p>))
+          }
         </div>
 
         <div className="person-story">
-          {erasInfoP.map((item, index) => (
-            <p key={"p" + index}>{item}</p>
-          ))}
+          {
+            //erasInfoP.map((item, index) => (<p key={"p" + index}>{item}</p>))
+          }
         </div>
       </div>
     );
   }
 }
-
-/**{erasListP.map((item, index) => (
-            <p key={"p" + index}>{item}</p>
-          ))} */
