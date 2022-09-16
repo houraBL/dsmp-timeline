@@ -7,6 +7,19 @@ export default class ApexChart extends Component {
   mwapiService = new MWapiService();
 
   state = {
+    clickedEra: {
+      name: "",
+      data: [
+        {
+          arc: "",
+          x: "",
+          y: ["", ""],
+          description: "",
+          rangeName: "",
+        },
+      ],
+    },
+
     textTimeline: null,
     erasListP: [],
     erasInfoP: [],
@@ -54,8 +67,27 @@ export default class ApexChart extends Component {
           horizontal: 16,
           vertical: 8,
         },
+
+        onItemClick: {
+          toggleDataSeries: false,
+        },
       },
-      tooltip: {},
+      tooltip: {
+        enabled: true,
+        followCursor: true,
+        marker: {
+          show: false,
+        },
+        custom: ({ series, seriesIndex, dataPointIndex, w }) => {
+          //console.log(w.config.series[seriesIndex]);
+          this.setState({
+            clickedEra: w.config.series[seriesIndex],
+          });
+          var data = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
+
+          return null;
+        },
+      },
     },
     series: [],
   };
@@ -174,7 +206,8 @@ export default class ApexChart extends Component {
   }
 
   render() {
-    const { erasListP, erasListPPP, erasInfoP, options, series } = this.state;
+    const { erasListP, erasListPPP, erasInfoP, options, series, clickedEra } =
+      this.state;
     return (
       <div id="chart">
         <ReactApexChart
@@ -183,18 +216,44 @@ export default class ApexChart extends Component {
           type="rangeBar"
           height="350"
         />
-        <div className="person-story">
-          {
-            //erasListPPP.map((item, index) => (<p key={"p" + index}>{item}</p>))
-          }
-        </div>
+        <div className="timeline">
+          <div className="card">
+            <div className="title-holder">
+              <div className="arc-title">{clickedEra.data[0].arc}:</div>
 
-        <div className="person-story">
-          {
-            //erasInfoP.map((item, index) => (<p key={"p" + index}>{item}</p>))
-          }
+              <div className="era-title">{clickedEra.name}</div>
+            </div>
+            {clickedEra.name ? (
+              <div className="dates">
+                {new Date(clickedEra.data[0].y[0]).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+                {" — "}
+                {new Date(clickedEra.data[0].y[1]).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </div>
+            ) : null}
+
+            <div className="description">{clickedEra.data[0].description}</div>
+          </div>
         </div>
       </div>
     );
   }
 }
+
+/**
+
+        custom: ({ seriesIndex, w }) => {
+          //console.log(w.config.series[seriesIndex]);
+          this.setState({
+            clickedEra: w.config.series[seriesIndex],
+          });
+          return null;
+        },
+ */

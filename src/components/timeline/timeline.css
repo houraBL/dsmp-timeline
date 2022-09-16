@@ -1,27 +1,68 @@
 .timeline {
-    margin-top: .5rem;
-    padding-left: 10px;
+  margin-top: 0.5rem;
+  padding-left: 10px;
 }
 
 .timeline ul li {
-    list-style: none;
-    margin: 0;
-    padding: .5rem 1rem;
-    border-radius: 3px;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
 }
 
 .timeline ul li:hover {
-    background-color:  #ddfff7;
+  background-color: #ddfff7;
 }
 
 .timeline a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .timeline h3 a {
-    color: #00bc8c;
+  color: #00bc8c;
 }
 
 .timeline h3 a:hover {
-    color: #00d19d;
+  color: #00d19d;
+}
+.timeline .card {
+  border-radius: 1rem;
+  min-width: 400px;
+  width: 60%;
+  box-shadow: 0 8px 16px lightgray;
+  padding: 2rem;
+  margin: 1rem auto;
+}
+
+.timeline .title-holder {
+  padding: 0.25rem 1rem;
+  display: flex;
+  margin: 0 2rem;
+}
+
+.timeline .description {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 1rem auto;
+  font-size: 1.1rem;
+
+  text-indent: 1rem;
+}
+
+.timeline .arc-title {
+  font-size: 1.5rem;
+  padding: 0.25rem 1rem;
+}
+
+.timeline .era-title {
+  font-size: 1.5rem;
+  padding: 0.25rem 1rem;
+  font-weight: bold;
+}
+
+.timeline .dates{
+  font-size: 1.5rem;
+  margin: 0 2rem;
+  padding: 0rem 2rem;
 }

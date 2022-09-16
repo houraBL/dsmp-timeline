@@ -36,7 +36,7 @@ export default class MemberDetails extends Component {
       const personName = wikiRespond.title.split("/")[0];
       const ign = strippedHTML.match(new RegExp("IGN" + "\\s(\\w+)"))[1];
       //.split("IGN ").pop().split(" ")[0];
-      console.log(strippedHTML)
+      //console.log(strippedHTML)
       const dateJoined =
         "" + strippedHTML.match(/\s\w*\s\d*\W\s\d{4}/gm)[0];
         //.split("Date joined ")
