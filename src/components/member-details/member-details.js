@@ -34,16 +34,23 @@ export default class MemberDetails extends Component {
       const strippedHTML = this.getStrippedHTML(wikiRespond);
 
       const personName = wikiRespond.title.split("/")[0];
-      const ign = strippedHTML.split("IGN ").pop().split(" ")[0];
-      console.log(strippedHTML);
-      console.log(strippedHTML.split("IGN ").pop());
-      const dateJoined = strippedHTML
-        .split("Date joined ")
-        .pop()
-        .split("&")[0]
-        .split("Gender")[0]
-        .split("(")[0];
-      const gender = strippedHTML.split("Gender ").pop().split("Pronouns")[0];
+      const ign = strippedHTML.match(new RegExp("IGN" + "\\s(\\w+)"))[1];
+      //.split("IGN ").pop().split(" ")[0];
+      console.log(strippedHTML)
+      const dateJoined =
+        "" + strippedHTML.match(/\s\w*\s\d*\W\s\d{4}/gm)[0];
+        //.split("Date joined ")
+        //.pop()
+        //.split("&")[0]
+        //.split("Gender")[0]
+        //.split("(")[0];
+        const preGender = strippedHTML.substring(
+          strippedHTML.indexOf("Gender") + 6,
+          strippedHTML.lastIndexOf("Pronouns")
+        );
+        let gender;
+        (preGender.length > 50)?(gender = "unidentified"):(gender=preGender);
+
 
       const partUrl = "https://static.wikia.nocookie.net/dream_team/images/";
       const normalSkin =
@@ -107,17 +114,17 @@ export default class MemberDetails extends Component {
             <ul className="list-group">
               <li className="list-group-item">
                 <span className="term">IGN</span>
-                <span>{ign}</span>
+                <span className="info">{ign}</span>
               </li>
 
               <li className="list-group-item">
                 <span className="term">Date joined</span>
-                <span>{dateJoined}</span>
+                <span className="info">{dateJoined}</span>
               </li>
 
               <li className="list-group-item">
                 <span className="term">Gender</span>
-                <span>{gender}</span>
+                <span className="info">{gender}</span>
               </li>
             </ul>
           </div>

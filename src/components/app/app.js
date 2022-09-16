@@ -39,7 +39,7 @@ export default class App extends Component {
 
     return (
       <Router>
-        <div>
+        <div className="app">
           <nav className="nav">
             <div className="site-title">
               <NavLink to="/">DreamSMP</NavLink>

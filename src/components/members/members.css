@@ -3,6 +3,8 @@
     font-weight: bold;
     background-color: whitesmoke;
     height: calc(100vh - 56px);
+    overflow:auto;
+    overflow-y: scoll;
 }
 
 .members ul {

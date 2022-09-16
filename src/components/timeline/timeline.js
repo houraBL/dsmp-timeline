@@ -13,10 +13,12 @@ export default class ApexChart extends Component {
     erasListPPP: [],
     options: {
       chart: {
+        animations: { enabled: false },
         type: "rangeBar",
         toolbar: { show: false },
         zoom: { enabled: false },
         brush: { enabled: false },
+        height: "50",
       },
       plotOptions: {
         bar: {
@@ -44,7 +46,7 @@ export default class ApexChart extends Component {
       ],
       fill: { type: "solid" },
       xaxis: { type: "datetime" },
-      yaxis: { labels: { show: true } },
+      yaxis: { labels: { show: false } },
       legend: {
         position: "bottom",
         fontSize: "16px",
@@ -99,7 +101,8 @@ export default class ApexChart extends Component {
             .split(/\n\n/gm)[0];
           let elem = [
             {
-              x: arc,
+              arc: arc,
+              x: "1",
               y: newEraInfoDesc
                 .match(/\w*\s\d*\W\s\d{4}/gm)
                 .map((date) => new Date(date).getTime()),
@@ -119,7 +122,7 @@ export default class ApexChart extends Component {
         }
       }
     }
-    console.log(amazingDataStructure, series);
+    series[series.length - 1].data[0].y.push(new Date().getTime());
     return [amazingDataStructure, series];
   }
 
@@ -151,11 +154,11 @@ export default class ApexChart extends Component {
 
       const dataToShow = this.getNestedErasList(erasListPPP, erasInfo);
       //console.log(dataToShow[1])
-      console.log(this.state.series);
+      //console.log(this.state.series);
       //console.log(erasInfo);
-
       const newSeries = dataToShow[1];
-      console.log(newSeries);
+      //console.log(newSeries);
+
       this.setState({
         textTimeline: strippedHTML,
         erasListP: erasListP,
@@ -178,7 +181,7 @@ export default class ApexChart extends Component {
           options={options}
           series={series}
           type="rangeBar"
-          height={250}
+          height="350"
         />
         <div className="person-story">
           {

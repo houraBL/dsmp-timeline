@@ -33,13 +33,18 @@
   font-weight: bold;
 }
 
+.member-details .list-group-item .info {
+  min-width: 160px;
+  text-align: right;
+}
 
 .member-details .card {
   border-radius: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 60%;
+  ;
+  min-width: 480px;
   box-shadow: 0 8px 16px lightgray;
   padding: 2rem;
   margin: 1rem auto;
@@ -47,6 +52,7 @@
 
 .member-details .card-info {
   display: flexbox;
+  min-width: 265px;
   width: 100%;
 }
 
